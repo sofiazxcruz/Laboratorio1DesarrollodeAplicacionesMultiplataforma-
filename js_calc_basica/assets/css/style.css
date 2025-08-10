@@ -1,0 +1,107 @@
+/*Laboratorio:
+1. Arreglar bug que limite los numeros en pantalla
+2. Funcionabilidad de boton de porcentaje
+3. Si lo que se presiona despues de igual es un numero entonces que borre el resultado anterior e inicie una nueva operacion
+4. Muestre la operacion completa en el display superior
+*/
+
+*,
+body {
+  box-sizing: border-box;
+  font-family: Gotham Rounded, sans-serif;
+  padding: 0;
+  margin: 0;
+  outline: 0;
+}
+
+body {
+  background-image: linear-gradient(
+    to bottom right,
+    rgb(113, 63, 187),
+    rgba(0, 58, 93, 1)
+  );
+}
+
+.container {
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+  place-items: center;
+}
+
+.calculadora {
+  position: relative;
+  height: auto;
+  width: auto;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 30px #000;
+  background-color: #121212;
+  user-select: none; /* UX */
+}
+
+/* ======= PANTALLA ======= */
+.pantalla {
+  background-color: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 110px;                 /* bug4: +altura para ver operación */
+  padding: 8px 12px;             /* bug4: respiro lateral */
+  border-radius: 8px;
+}
+
+/* bug4: la operacion completa esta arriba, en una línea, con elipsis si es larga */
+.pantalla .valor-previo {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 1rem;               /* un poco más pequeño */
+  min-height: 1.2em;
+  width: 100%;
+  text-align: right;
+  white-space: nowrap;           
+  overflow: hidden;
+  text-overflow: ellipsis;       /* pone "..." si no cabe */
+  letter-spacing: .5px;
+}
+
+/* bug1: número actual no salta de linea, usa elipsis; porque js corta dígitos */
+.pantalla .valor-actual {
+  color: white;
+  font-size: clamp(1.6rem, 6vw, 2.6rem);
+  width: 100%;
+  text-align: right;
+  white-space: nowrap;           
+  overflow: hidden;
+  text-overflow: ellipsis;       /* elipsis visual si excede de numeross  */
+  font-variant-numeric: tabular-nums; /* dígitos alineados */
+}
+
+/* bug1 (yo agregue esto de manera opcional): reduce un poco la fuente cerca del límite */
+.pantalla .valor-actual.shrink {
+  font-size: clamp(1.4rem, 5.5vw, 2.3rem);
+}
+
+/* ======= BOTONES ======= */
+.calculadora #display { color: #ffffff; }
+.calculadora button.btn-numero { background-color: #4e4f50; color: #ffffff; }
+.calculadora button.btn-operador { background-color: #ca680d; color: #ffffff; }
+.calculadora button.btn-especial { background-color: #b4b2af; color: #000000; }
+
+button {
+  height: 60px;
+  width: 60px;
+  border: 0;
+  border-radius: 30px;
+  margin: 5px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: transform 200ms ease, box-shadow 200ms ease; /* foco visible */
+  outline: none;
+}
+
+button:hover { transform: scale(1.1); }
+button:active { transform: scale(0.98); }
+button:focus-visible { box-shadow: 0 0 0 3px rgba(202, 104, 13, 0.65); }
+
+button#cero { width: 130px; }

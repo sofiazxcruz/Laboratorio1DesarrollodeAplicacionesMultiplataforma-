@@ -1,0 +1,70 @@
+/*Laboratorio:
+1. Arreglar bug que limite los numeros en pantalla
+2. Funcionabilidad de boton de porcentaje
+3. Si lo que se presiona despues de igual es un numero entonces que borre el resultado anterior e inicie una nueva operacion
+4. Muestre la operacion completa en el display superior
+*/
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Calculadora - Vanilla JS</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png">
+  <meta name="format-detection" content="telephone=no">
+</head>
+<body>
+  <div class="container">
+    <div class="calculadora" role="application" aria-label="calculadora">
+      <div class="pantalla">
+        <div data-valor-previo class="valor-previo" aria-live="polite"></div>
+        <!-- bug1 (limite) + bug4 (muestra la operacion): data-max-digits y aria-live ayudan al control visual -->
+        <div data-valor-actual class="valor-actual" data-max-digits="12" aria-live="polite"></div>
+      </div>
+
+      <div class="buttons">
+        <table>
+          <tr>
+            <!-- buena practica: type="button" -->
+            <td><button type="button" class="btn-especial" data-borrar-todo>AC</button></td>
+            <td><button type="button" class="btn-especial" data-borrar>C</button></td>
+            <td><button type="button" class="btn-especial" data-porcentaje>%</button></td>
+            <td><button type="button" class="btn-operador" data-operacion="÷">÷</button></td>
+          </tr>
+          <tr>
+            <td><button type="button" class="btn-numero" data-numero="7">7</button></td>
+            <td><button type="button" class="btn-numero" data-numero="8">8</button></td>
+            <td><button type="button" class="btn-numero" data-numero="9">9</button></td>
+            <td><button type="button" class="btn-operador" data-operacion="x">x</button></td>
+          </tr>
+          <tr>
+            <td><button type="button" class="btn-numero" data-numero="4">4</button></td>
+            <td><button type="button" class="btn-numero" data-numero="5">5</button></td>
+            <td><button type="button" class="btn-numero" data-numero="6">6</button></td>
+            <td><button type="button" class="btn-operador" data-operacion="-">-</button></td>
+          </tr>
+          <tr>
+            <td><button type="button" class="btn-numero" data-numero="1">1</button></td>
+            <td><button type="button" class="btn-numero" data-numero="2">2</button></td>
+            <td><button type="button" class="btn-numero" data-numero="3">3</button></td>
+            <td><button type="button" class="btn-operador" data-operacion="+">+</button></td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <button type="button" class="btn-numero" id="cero" data-numero="0">0</button>
+            </td>
+            <td><button type="button" class="btn-numero" data-numero=".">.</button></td>
+            <td><button type="button" class="btn-operador" data-igual>=</button></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script src="src/script.js" defer></script>
+</body>
+</html>
